@@ -1,0 +1,48 @@
+const Discord = require("discord.js");
+const axios = require("axios");
+
+// Load environment variables
+require("dotenv").config();
+
+// Initialize Discord bot
+const client = new Discord.Client();
+
+client.on("ready", () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on("message", async (msg) => {
+  if (msg.author.bot) return;
+
+  // Process image and text inputs
+  const attachments = msg.attachments.array();
+  const images = attachments.map((attachment) => ({
+    image: attachment.url,
+  }));
+
+  const content = [msg.content, ...images];
+
+  // Call OpenAI API
+  const response = await axios.post(
+    "https://api.openai.com/v1/chat/completions",
+    {
+      model: "gpt-4",
+      messages: [
+        { role: "system", content: "You are a helpful assistant." },
+        { role: "user", content: content },
+      ],
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+      },
+    }
+  );
+
+  // Post the result
+  const assistantReply = response.data.choices[0].message.content;
+  msg.reply(assistantReply);
+});
+
+client.login(process.env.DISCORD_TOKEN);
