@@ -15,22 +15,19 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+
 I integrated the OpenAI API into a discord bot.
+
 The server connects with OpenAI API and the Discord API.
+
 Then it waits for a message and uses ChatGPT returns a response.
+
 It is fast and powerful. The possibilities of this tech is limitless.
 
 
-
-### Built With
-
-
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
+<br>
+<br>
+<br>
 <!-- GETTING STARTED -->
 ## Getting Started
 
