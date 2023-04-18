@@ -27,13 +27,7 @@ client.on("messageCreate", async function(message) {
             messages: [{ role: "user", content: message.content }],
             max_tokens: 100,
             
-            // model: "davinci",
-            // prompt: `ChatGPT is a friendly chatbot\n
-            //         ${message.author.username}: ${message.content}\n
-            //         ChatGPT:`,
-            // temperature:0.9,
-            // max_tokens: 100,
-            // stop: ["ChatGPT:", "Ender:"],
+
         })
 
         message.reply(`${gptResponse.data.choices[0].message.content}`);
